@@ -7,6 +7,7 @@ from uniandes.cloud.controller.TemporalFileService import TemporalFileService
 from uniandes.cloud.aws.S3 import S3
 from uniandes.cloud.aws.SQS import SQS
 from uniandes.cloud.aws.CloudFront import CloudFront
+import time
 
 while 1:
     print "Init File Processing"
@@ -35,10 +36,13 @@ while 1:
                     message.delete() #Elimina los mensajes en SQS
                 else:
                     print "Video filename corrupted"
+                    message.delete()
             else:
                 print "All videos are processed"
+                message.delete()
         else:
             print "Message without attribute"
+            message.delete()
 
     print "Finish Processing"
 
