@@ -7,6 +7,8 @@ from ..model.Contest import Contest
 from ..aws.DynamoDB import DynamoDB
 from ..aws.S3 import S3
 
+import StringIO
+
 class ContestController():
 
     fileSystem = None
@@ -28,11 +30,12 @@ class ContestController():
         contest.set_variables_contest(user_id, names, date_ini, deadline, description, url)
 
     #-----  IMAGEN TEMPORAL    ------#
+        temp_img = StringIO.StringIO()
         img = self.image_service.generate_img(baner)
-        img.save(TemporalFileService().url_banner+contest.banner,"png")
+        img.save(temp_img.getvalue(),"png")
 
     #-----  AWS -----#
-        self.s3.save_banner(TemporalFileService().url_banner,contest.banner)
+        self.s3.save_banner(temp_img.getvalue(),contest.banner)
         self.dynamoDB.createContest(contest)
 
         return contest
@@ -78,11 +81,12 @@ class ContestController():
         contest.setId(id)
 
     #-----  IMAGEN TEMPORAL    -----#
+        temp_img = StringIO.StringIO()
         img = ImageService().generate_img(baner)
-        img.save(TemporalFileService().url_banner+contest.banner,"png")
+        img.save(temp_img+contest.banner,"png")
 
     #-----  AWS -----#
-        self.s3.save_banner(TemporalFileService().url_banner,contest.banner)
+        self.s3.save_banner(temp_img.getvalue(),contest.banner)
         return self.dynamoDB.updateContest(contest)
 
 #//-----    ELIMINA CONCURSO ESPECIFICO ----//

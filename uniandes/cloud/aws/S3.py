@@ -10,11 +10,8 @@ class S3:
                                       aws_access_key_id=os.environ["aws_access_key_id"],
                                       aws_secret_access_key=os.environ["aws_secret_access_key"])
 
-    def save_banner(self, url, name):
-        data = open(url+name, 'rb')
+    def save_banner(self, data, name):
         self.s3.Bucket('mebanner').put_object(Key=name, Body=data)
-        data.close()
-        os.remove(url+name)
 
     def delete_banner(self,name):
         bucket = self.s3.Bucket('mebanner')
