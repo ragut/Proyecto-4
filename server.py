@@ -224,7 +224,7 @@ if __name__ == "__main__":
         {"path": settings["static_path"]})
     ], **settings)
 
-    application.listen(8800)
+    #application.listen(8800)
 
     logging.log(logging.INFO, "Application ready")
     tornado.ioloop.IOLoop.current().start()
