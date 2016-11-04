@@ -30,9 +30,9 @@ class ContestController():
         contest.set_variables_contest(user_id, names, date_ini, deadline, description, url)
 
     #-----  IMAGEN TEMPORAL    ------#
-        temp_img = StringIO.StringIO()
         img = self.image_service.generate_img(baner)
-        img.save(temp_img.getvalue(),"png")
+        temp_img = StringIO.StringIO()
+        img.save(temp_img,"png")
 
     #-----  AWS -----#
         self.s3.save_banner(temp_img.getvalue(),contest.banner)
@@ -81,9 +81,9 @@ class ContestController():
         contest.setId(id)
 
     #-----  IMAGEN TEMPORAL    -----#
-        temp_img = StringIO.StringIO()
         img = ImageService().generate_img(baner)
-        img.save(temp_img+contest.banner,"png")
+        temp_img = StringIO.StringIO()
+        img.save(temp_img,"png")
 
     #-----  AWS -----#
         self.s3.save_banner(temp_img.getvalue(),contest.banner)
