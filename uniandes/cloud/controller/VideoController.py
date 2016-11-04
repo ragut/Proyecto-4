@@ -31,10 +31,10 @@ class VideoController():
 
     #------ VIDEO TEMPORAL ------//
         temp_video = StringIO.StringIO()
-        path = os.path.join(temp_video,"/"+video.video_name+"."+video.original_file)
-        fileObj = open(path, 'wb')
-        fileObj.write(videoFile)
-        fileObj.close()
+        #path = os.path.join(temp_video,"/"+video.video_name+"."+video.original_file)
+       # fileObj = open(path, 'wb')
+        #fileObj.write(videoFile)
+        #fileObj.close()
     #-----  AWS ------#
         self.s3.save_original(temp_video.getvalue(),video.video_name+"."+video.original_file)
         self.sqs.send_message_to_process(video.id)
