@@ -203,7 +203,7 @@ class MainHandler(BaseHandler):
 
 settings = {"static_path": os.path.join(os.path.dirname(__file__),"web"),
             "debug": True,
-            "cookie_secret": "YeEhlzg4S++zgdqmQnZM5a+VxX2TDUHOoiCN84A5D04=",
+            "cookie_secret": "sss",
             "login_url": "/login"}
 
 if __name__ == "__main__":
