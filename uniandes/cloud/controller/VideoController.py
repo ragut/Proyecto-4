@@ -36,7 +36,7 @@ class VideoController():
         #fileObj.write(videoFile)
         #fileObj.close()
     #-----  AWS ------#
-        self.s3.save_original(temp_video.getvalue(),video.video_name+"."+video.original_file)
+        self.s3.save_original(temp_video,video.video_name+"."+video.original_file)
         self.sqs.send_message_to_process(video.id)
 
         return self.dynamoDB.createVideo(video)
