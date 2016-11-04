@@ -7,6 +7,8 @@ from ..aws.DynamoDB import DynamoDB
 from ..aws.SQS import SQS
 from ..aws.S3 import S3
 
+import StringIO
+
 class VideoController():
 
     fileSystem = None
@@ -28,12 +30,13 @@ class VideoController():
         video.set_variables_video(user_id,contest_id, name_video, email, names_user, lastnames_user, "On Process", extension)
 
     #------ VIDEO TEMPORAL ------//
-        path = os.path.join(TemporalFileService().url_original,video.video_name+"."+video.original_file)
+        temp_video = StringIO.StringIO()
+        path = os.path.join(temp_video,video.video_name+"."+video.original_file)
         fileObj = open(path, 'wb')
         fileObj.write(videoFile)
         fileObj.close()
     #-----  AWS ------#
-        self.s3.save_original(TemporalFileService().url_original,video.video_name+"."+video.original_file)
+        self.s3.save_original(temp_video.getvalue(),video.video_name+"."+video.original_file)
         self.sqs.send_message_to_process(video.id)
 
         return self.dynamoDB.createVideo(video)

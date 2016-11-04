@@ -18,11 +18,9 @@ class S3:
         obj = bucket.Object(name)
         obj.delete()
 
-    def save_original(self, url, name):
-        data = open(url+name, 'rb')
+    def save_original(self, data, name):
         self.s3.Bucket('meoriginal').put_object(Key=name, Body=data)
-        data.close()
-        os.remove(url+name)
+
 
     def save_converted(self,url,name):
         data = open(url+name, 'rb')
