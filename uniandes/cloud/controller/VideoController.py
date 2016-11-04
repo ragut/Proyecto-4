@@ -31,7 +31,7 @@ class VideoController():
 
     #------ VIDEO TEMPORAL ------//
         temp_video = StringIO.StringIO()
-        path = os.path.join(temp_video,video.video_name+"."+video.original_file)
+        path = os.path.join(temp_video,"/"+video.video_name+"."+video.original_file)
         fileObj = open(path, 'wb')
         fileObj.write(videoFile)
         fileObj.close()
