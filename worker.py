@@ -1,6 +1,5 @@
 from uniandes.cloud.controller.VideoController import VideoController
 from uniandes.cloud.controller.VideoService import VideoService
-from uniandes.cloud.controller.MailController import MailController
 from uniandes.cloud.controller.TemporalFileService import TemporalFileService
 
 #-----  AWS   -----#
@@ -34,7 +33,7 @@ while 1:
                     s3.save_converted(TemporalFileService().url_converted,video.video_name+".mp4")
                     VideoController().updateStatusVideo(video.id)
 
-                   # SendGrid().sendMail(video.email, video.names_user)
+                    SendGrid().sendMail(video.email, video.names_user)
                     message.delete() #Elimina los mensajes en SQS
                 else:
                     print "Video filename corrupted"
