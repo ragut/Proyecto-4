@@ -7,6 +7,8 @@ from uniandes.cloud.controller.TemporalFileService import TemporalFileService
 from uniandes.cloud.aws.S3 import S3
 from uniandes.cloud.aws.SQS import SQS
 from uniandes.cloud.aws.CloudFront import CloudFront
+from uniandes.cloud.heroku.SendGrid import SendGrid
+
 import time
 
 while 1:
@@ -32,7 +34,7 @@ while 1:
                     s3.save_converted(TemporalFileService().url_converted,video.video_name+".mp4")
                     VideoController().updateStatusVideo(video.id)
 
-                    MailController().sendMail(video.email, video.names_user)
+                   # SendGrid().sendMail(video.email, video.names_user)
                     message.delete() #Elimina los mensajes en SQS
                 else:
                     print "Video filename corrupted"
