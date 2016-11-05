@@ -6,7 +6,8 @@ from ..model.User import User
 
 #-----  AWS ------#
 from ..aws.DynamoDB import DynamoDB
-from ..aws.ElastiCache import ElastiCache
+from ..heroku import MemCachier
+
 
 class UserController():
 
@@ -18,7 +19,7 @@ class UserController():
     def __init__(self):
     #-----  AWS ------#
         self.dynamoDB = DynamoDB()
-        self.elasticache = ElastiCache()
+        self.elasticache = MemCachier()
 
     def add_User(self, names, lastnames, email, password):
         user = User()
