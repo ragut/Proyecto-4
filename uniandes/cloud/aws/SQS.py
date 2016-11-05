@@ -23,3 +23,7 @@ class SQS:
     def get_message_to_process(self):
         queue = self.sqs.get_queue_by_name(QueueName='m_videoToprocess')
         return queue.receive_messages(MessageAttributeNames=['Video'])
+
+    def get_message_number(self):
+        queue = self.sqs.get_queue_by_name(QueueName='m_videoToprocess')
+        return int(queue.attributes["ApproximateNumberOfMessages"])
