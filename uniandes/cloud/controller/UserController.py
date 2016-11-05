@@ -6,7 +6,7 @@ from ..model.User import User
 
 #-----  AWS ------#
 from ..aws.DynamoDB import DynamoDB
-from ..heroku import ElasticCache
+from ..heroku.ElasticCache import ElasticCache
 
 
 class UserController():
