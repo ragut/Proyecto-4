@@ -1,7 +1,8 @@
 import pylibmc
 import os
 
-class MemCachier:
+
+class ElasticCache:
     mc = None
 
     def __init__(self):
